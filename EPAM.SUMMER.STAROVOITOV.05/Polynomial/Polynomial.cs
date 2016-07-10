@@ -109,12 +109,39 @@ namespace Polynomial
 
         public override int GetHashCode()
         {
-            StringBuilder result = new StringBuilder(string.Empty);
+            StringBuilder result = new StringBuilder();
             foreach (double coef in _coefficients)
             {
                 result.Append(coef.ToString());
             }
             return result.ToString().GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+            if (_coefficients.Length != 0)
+            {
+                int degree = _coefficients.Length - 1;
+                string sign;
+                result.Append(_coefficients[degree] + "x^" + degree);
+                for (int i = _coefficients.Length - 2; i > 0; i--)
+                {
+                    if (_coefficients[i] == 0)
+                    {
+                        sign = _coefficients[i] < 0 ? "-" : "+";
+                        result.Append(sign + _coefficients[i] + "x^" + (i - 1));
+                    }
+                }
+                if (_coefficients[0] == 0)
+                {
+                    sign = _coefficients[0] < 0 ? "-" : "+";
+                    result.Append(sign + _coefficients[0]);
+                }
+            }
+            else
+                result.Append(0);
+            return result.ToString();
         }
 
         private static Polynomial AddOrSub(Polynomial firstPolynomial, Polynomial secondPolynomial, Func<double, double, double> operation)
