@@ -89,6 +89,16 @@ namespace Polynomial
             return comparer.Equals(this._coefficients, other._coefficients);
         }
 
+        public double GetPolynomialValue(double x)
+        {
+            double result = 0;
+            for (int i = 0; i < _coefficients.Length; i++)
+            {
+                result += Math.Pow(x, i) * _coefficients[i];
+            }
+            return result;
+        }
+
         public override bool Equals(object obj)
         {
             var other = obj as Polynomial;
