@@ -20,14 +20,12 @@ namespace Polynomial
 
         public static Polynomial operator +(Polynomial firstPolynomial, Polynomial secondPolynomial)
         {
-            AddOrSub(firstPolynomial, secondPolynomial, (first, second) => first + second);
-            return null;
+            return AddOrSub(firstPolynomial, secondPolynomial, (first, second) => first + second);
         } 
 
         public static Polynomial operator -(Polynomial firstPolynomial, Polynomial secondPolynomial)
         {
-            AddOrSub(firstPolynomial, secondPolynomial, (first, second) => first - second);
-            return null;
+            return AddOrSub(firstPolynomial, secondPolynomial, (first, second) => first - second);
         }
 
         private static Polynomial AddOrSub(Polynomial firstPolynomial, Polynomial secondPolynomial, Func<double, double, double> operation)
