@@ -59,7 +59,7 @@ namespace Polynomial
                 return true;
             }
 
-            if ((firstPolynomial == null) || (secondPolynomial == null))
+            if (((object)firstPolynomial == null) || ((object)secondPolynomial == null))
             {
                 return false;
             }
@@ -73,7 +73,7 @@ namespace Polynomial
 
         public bool Equals(Polynomial other)
         {
-            if (other == null)
+            if ((object)other == null)
                 return false;
 
             if (object.ReferenceEquals(this, other))
@@ -127,13 +127,13 @@ namespace Polynomial
                 result.Append(_coefficients[degree] + "x^" + degree);
                 for (int i = _coefficients.Length - 2; i > 0; i--)
                 {
-                    if (_coefficients[i] == 0)
+                    if (_coefficients[i] != 0)
                     {
                         sign = _coefficients[i] < 0 ? "-" : "+";
-                        result.Append(sign + _coefficients[i] + "x^" + (i - 1));
+                        result.Append(sign + Math.Abs(_coefficients[i]) + "x^" + i);
                     }
                 }
-                if (_coefficients[0] == 0)
+                if (_coefficients[0] != 0)
                 {
                     sign = _coefficients[0] < 0 ? "-" : "+";
                     result.Append(sign + _coefficients[0]);
@@ -165,7 +165,7 @@ namespace Polynomial
             if (isZero)
             {
                 int zeroCount = 0;
-                for (int i = resultCoefficients.Length - 1; i < -1; i--)
+                for (int i = resultCoefficients.Length - 1; i > -1; i--)
                 {
                     if (resultCoefficients[i] == 0)
                         zeroCount++;
